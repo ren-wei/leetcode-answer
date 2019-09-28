@@ -1,2 +1,2 @@
 # leetcode-answer
-Leetcode's answer
+Leetcode's answer of javascript
