@@ -15,13 +15,11 @@ var twoSum = function(nums, target) {
   
   var map = new Map()
   for (var i=0;i<nums.length;i++) {
-    map.set(nums[i], i)
-  }
-  for (var j=0;j<nums.length;j++) {
-    var value = map.get(target - nums[j])
-    if (value && j!=value) {
-      return [j, value]
+    var value = map.get(target - nums[i])
+    if (value !== undefined) {
+      return [value, i]
     }
+    map.set(nums[i], i)
   }
 };
 
