@@ -11,12 +11,12 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-  var numRowList = Array.from({ length:Math.min(numRows, s.length) }, () => [])
+  var numRowList = Array.from({ length:Math.min(numRows, s.length) }, () => "")
   var index = 0
   while (index < s.length) {
     for (var i=0;i<numRowList.length;i++) {
       if (index < s.length) {
-        numRowList[i].push(s[index++])
+        numRowList[i] += s[index++]
       } else {
         break
       }
@@ -24,14 +24,14 @@ var convert = function(s, numRows) {
 
     for (var j=numRowList.length-2;j>0;j--) {
       if (index < s.length) {
-        numRowList[j].push(s[index++])
+        numRowList[j] += s[index++]
       } else {
         break
       }
     }
   }
 
-  return [].concat(...numRowList).join('')
+  return ''.concat(...numRowList)
 };
 // @lc code=end
 
