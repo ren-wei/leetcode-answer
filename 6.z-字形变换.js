@@ -11,27 +11,31 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-  var numRowList = Array.from({ length:Math.min(numRows, s.length) }, () => "")
-  var index = 0
-  while (index < s.length) {
-    for (var i=0;i<numRowList.length;i++) {
-      if (index < s.length) {
-        numRowList[i] += s[index++]
-      } else {
-        break
-      }
-    }
+  if (numRows === 1) {
+    return s
+  }
+  var result = ''
+  var len = s.length
+  var loopLen = 2 * numRows - 2
 
-    for (var j=numRowList.length-2;j>0;j--) {
-      if (index < s.length) {
-        numRowList[j] += s[index++]
-      } else {
-        break
+  // 第一层
+  for (var j=0;j<len;j+=loopLen) {
+    result += s[j]
+  }
+  // 中间层
+  for (var i=1;i<numRows-1;i++) {
+    for (var j=0;j + i < len;j += loopLen) {
+      result += s[j+i]
+      if (j + loopLen -i < len) {
+        result += s[j+loopLen-i]
       }
     }
   }
-
-  return ''.concat(...numRowList)
+  // 最后一层
+  for (var j=numRows-1;j<len;j += loopLen) {
+    result += s[j]
+  }
+  return result
 };
 // @lc code=end
 
