@@ -10,33 +10,29 @@
  * @return {number}
  */
 var reverse = function (x) {
+  var answer = 0
   var plus = true
   if (x < 0) {
     plus = false
     x = -x
   }
-  // 翻转字符串
-  var s = x.toString()
-  var sList = s.split('')
-  sList.reverse()
-  s = sList.join('')
-  // 去除头部的`0`
-  s.replace(/\b(0+)/gi,"")
-  // 判断是否溢出
+  while (x > 9) {
+    var remain = x % 10
+    x = (x - remain) / 10
+    answer = answer * 10 + remain
+  }
   if (plus) {
-    if (s.length > 10 || s.length === 10 && s > "2147483647") {
+    if (2147483647 - x < answer * 10) {
       return 0
+    } else {
+      return answer * 10 + x
     }
   } else {
-    if (s.length > 10 || s.length === 10 && s > "2147483648") {
+    if (2147483648 - x < answer * 10) {
       return 0
+    } else {
+      return - (answer * 10 + x)
     }
-  }
-  if (plus) {
-    return Number(s)
-  }
-  else {
-    return -Number(s)
   }
 };
 // @lc code=end
