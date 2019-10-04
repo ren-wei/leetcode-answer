@@ -10,16 +10,17 @@
  * @return {boolean}
  */
 var isPalindrome = function(x) {
-  var s = x.toString()
-
-  var left = 0
-  var right = s.length - 1
-  while (left < right) {
-    if (s[left++] !== s[right--]) {
-      return false
-    }
+  if (x < 0) {
+    return false
   }
-  return true
+  var oldValue = x
+  var value = 0
+  while (x) {
+    var remain = x % 10
+    x = (x - remain) / 10
+    value = value * 10 + remain
+  }
+  return oldValue === value
 };
 // @lc code=end
 
