@@ -11,19 +11,28 @@
  * @return {boolean}
  */
 var isMatch = function(s, p) {
-  if (!p.length) {
-    return s === ''
-  }
+  var memo = Array.from({length: s.length+1}, function() {
+    return new Array(p.length+1)
+  })
 
-  var first = Boolean(s) && (s[0] === p[0] || p[0] === '.')
-
-  if (p.length > 1 && p[1] === '*') {
-    if (isMatch(s, p.substring(2))) {
-      return true
+  function dp(i, j) {
+    if (memo[i][j] === undefined) {
+      var ans
+      if (j === p.length) {
+        ans = i === s.length
+      } else {
+        var first = i < s.length && (p[j] === s[i] || p[j] === '.')
+        if (j+1 < p.length && p[j+1] === '*') {
+          ans = dp(i, j+2) || first && dp(i+1, j)
+        } else {
+          ans = first && dp(i+1, j+1)
+        }
+      }
+      memo[i][j] = ans
     }
-    return first && isMatch(s.substring(1), p)
-  } else {
-    return first && isMatch(s.substring(1), p.substring(1))
+    return memo[i][j]
   }
+
+  return dp(0, 0)
 };
 // @lc code=end
