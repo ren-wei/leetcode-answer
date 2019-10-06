@@ -14,14 +14,22 @@ var maxArea = function(height) {
   var left = 0
   var right = height.length - 1
   while (left < right) {
-    var volume = Math.min(height[left], height[right]) * (right - left)
-    if (volume > answer) {
-      answer = volume
-    }
-    if (height[left] < height[right]) {
-      left++
+    var leftValue = height[left]
+    var rightValue = height[right]
+    if (leftValue < rightValue) {
+      var volume = leftValue * (right - left)
+      if (volume > answer) {
+        answer = volume
+      }
+      while (height[++left] < leftValue) {
+      }
     } else {
-      right--
+      var volume = rightValue * (right - left)
+      if (volume > answer) {
+        answer = volume
+      }
+      while (height[--right] < rightValue) {
+      }
     }
   }
 
