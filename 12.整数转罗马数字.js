@@ -10,61 +10,44 @@
  * @return {string}
  */
 var intToRoman = function(num) {
-  var answer = []
-  while (num >= 1000) {
-    answer.push('M')
-    num -= 1000
-  }
-  if (num >= 900) {
-    answer.push('CM')
-    num -= 900
-  }
-  if (num >= 500) {
-    answer.push('D')
-    num -= 500
-  }
-  if (num >= 400) {
-    answer.push('CD')
-    num -= 400
-  }
-  while (num >= 100) {
-    answer.push("C")
-    num -= 100
-  }
-  if (num >= 90) {
-    answer.push('XC')
-    num -= 90
-  }
-  if (num >= 50) {
-    answer.push('L')
-    num -= 50
-  }
-  if (num >= 40) {
-    answer.push('XL')
-    num -= 40
-  }
-  while (num >= 10) {
-    answer.push('X')
-    num -= 10
-  }
-  if (num >= 9) {
-    answer.push('IX')
-    num -= 9
-  }
-  if (num >= 5) {
-    answer.push('V')
-    num -= 5
-  }
-  if (num >= 4) {
-    answer.push('IV')
-    num -= 4
-  }
-  while (num > 0) {
-    answer.push('I')
-    num--
+  var romans = [
+    ['I', 'IV', 'V', 'IX'],
+    ['X', 'XL', 'L', 'XC'],
+    ['C', 'CD', 'D', 'CM'],
+    ['M']
+  ]
+
+  var answer = ''
+
+  var index = 0
+  while (num) {
+    var m = num % 10
+    num = (num - m) / 10
+    var add = ''
+    
+    if (m === 9) {
+      answer = romans[index][3] + answer
+      index++
+      continue
+    }
+    if (m >= 5) {
+      add = romans[index][2]
+      m -= 5
+    }
+    if (m === 4) {
+      answer = romans[index][1] + answer
+      index++
+      continue
+    }
+    while (m) {
+      add += romans[index][0]
+      m--
+    }
+    answer = add + answer
+    index++
   }
 
-  return answer.join('')
+  return answer
 };
 // @lc code=end
 
