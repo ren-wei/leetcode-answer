@@ -23,26 +23,26 @@ var threeSum = function(nums) {
     if (i > 0 && nums[i] === nums[i-1]) {
       continue
     }
-    for (var j=i+1;j<nums.length;j++) {
-      if (nums[i] + nums[j] > 0) {
-        break
-      }
-      if (j > i+1 && nums[j] === nums[j-1]) {
-        continue
-      }
-      // 使用二分法查找第三个数
-      var left = j + 1
-      var right = nums.length - 1
-      while (left <= right) {
-        var mid = (left + right) / 2 | 0
-        var sum = nums[i] + nums[j] + nums[mid]
-        if (sum < 0) {
-          left = mid + 1
-        } else if (sum > 0) {
-          right = mid - 1
-        } else {
-          answer.push([nums[i], nums[j], nums[mid]])
-          break
+
+    var left = i+1
+    var right = nums.length - 1
+    while(left < right) {
+      var sum = nums[i] + nums[left] + nums[right]
+      if (sum < 0) {
+        left++
+        while (left > i+1 && nums[left] === nums[left-1]) {
+          left++
+        }
+      } else if (sum > 0) {
+        right--
+        while (nums[right] === nums[right+1]) {
+          right--
+        }
+      } else {
+        answer.push([nums[i], nums[left], nums[right]])
+        left++
+        while (left > i+1 && nums[left] === nums[left-1]) {
+          left++
         }
       }
     }
