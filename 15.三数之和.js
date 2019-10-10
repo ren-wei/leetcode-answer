@@ -44,6 +44,10 @@ var threeSum = function(nums) {
         while (left > i+1 && nums[left] === nums[left-1]) {
           left++
         }
+        right--
+        while (nums[right] === nums[right+1]) {
+          right--
+        }
       }
     }
   }
