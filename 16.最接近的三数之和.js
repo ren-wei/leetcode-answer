@@ -13,15 +13,37 @@
 var threeSumClosest = function(nums, target) {
   var answer = Infinity
   nums.sort((a, b) => a - b)
-  for (var i=0;i<nums.length-2;i++) {
+  var len = nums.length
+  for (var i=0;i<len-2;i++) {
+    while (nums[i] === nums[i-1]) {
+      i++
+    }
+    if (nums[i] + nums[i+1] + nums[i+2] > target) {
+      if (Math.abs(target - (nums[i] + nums[i+1] + nums[i+2])) < Math.abs(target - answer)) {
+        answer = nums[i] + nums[i+1] + nums[i+2]
+        continue
+      }
+    }
+    if (nums[i] + nums[len-1] + nums[len-2] < target) {
+      if (Math.abs(target - (nums[i] + nums[len-1] + nums[len-2])) < Math.abs(target - answer)) {
+        answer = nums[i] + nums[len-1] + nums[len-2]
+        continue
+      }
+    }
     var left = i + 1
-    var right = nums.length - 1
+    var right = len- 1
     while (left < right) {
       var sum = nums[i] + nums[left] + nums[right]
       if (sum < target) {
         left++
+        while (nums[left] === nums[left-1]) {
+          left++
+        }
       } else if (sum > target) {
         right--
+        while (nums[right] === nums[right+1]) {
+          right--
+        }
       } else {
         return target
       }
