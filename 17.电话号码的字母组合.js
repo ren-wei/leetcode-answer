@@ -10,8 +10,9 @@
  * @return {string[]}
  */
 var letterCombinations = function(digits) {
+  var answer = new Array()
   if (!digits.length) {
-    return []
+    return answer
   }
   var map = {
     '2': ['a', 'b', 'c'],
@@ -23,20 +24,19 @@ var letterCombinations = function(digits) {
     '8': ['t', 'u', 'v'],
     '9': ['w', 'x', 'y', 'z']
   }
-  function lc(digits, i) {
-    if (digits.length - i === 1) {
-      return map[digits[i]]
-    }
-    var answer = []
-    map[digits[i]].forEach(str => {
-      lc(digits, i+1).forEach(result => {
-        answer.push(str + result)
+
+  answer.push('')
+  for (var i=0;i<digits.length;i++) {
+    var x = digits[i]
+    while (answer[0].length === i) {
+      var t = answer.shift()
+      map[x].forEach(s => {
+        answer.push(t+s)
       })
-    })
-    return answer
+    }
   }
 
-  return lc(digits, 0)
+  return answer
 }
 // @lc code=end
 
