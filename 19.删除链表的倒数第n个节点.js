@@ -18,26 +18,19 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-  var len = 0
   var node = head
-  // 获取长度
-  while (node !== null) {
+  for (var i=0;i<n;i++) {
     node = node.next
-    len++
   }
-  // 如果要删除的位置为头节点
-  if (len === n) {
+  if (node === null) {
     return head.next
   }
-  // 获取要删除的位置并删除
-  node = head
-  var index = len - n
-  var prev
-  for (var i=0;i<index;i++) {
-    prev = node
+  var target = head
+  while (node.next !== null) {
+    target = target.next
     node = node.next
   }
-  prev.next = node.next
+  target.next = target.next.next
 
   return head
 }
