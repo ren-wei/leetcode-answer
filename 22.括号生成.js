@@ -13,16 +13,22 @@ var generateParenthesis = function(n) {
   if (n === 0) {
     return ['']
   }
-  var answer = []
-  for (var i=0;i<n;i++) {
-    generateParenthesis(i).forEach(left => {
-      generateParenthesis(n-1-i).forEach(right => {
-        answer.push('(' + left + ')' + right)
+
+  var answer = [[''], ['()']]
+
+  for (var i=2;i<n+1;i++) {
+    var left = []
+    for (var j=0;j<i;j++) {
+      answer[j].forEach(p => {
+        answer[i-1-j].forEach(q => {
+          left.push('(' + p + ')' + q)
+        })
       })
-    })
+    }
+    answer.push(left)
   }
 
-  return answer
+  return answer[n]
 }
 // @lc code=end
 
