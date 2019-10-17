@@ -10,24 +10,19 @@
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-  function generate(str, left, right, n, answer) {
-    if (left === n) {
-      for (var i=0;i<n-right;i++) {
-        str += ')'
-      }
-      answer.push(str)
-      return answer
-    }
-    if (left === right) {
-      answer.concat(generate(str + '(', left+1, right, n, answer))
-    } else {
-      answer.concat(generate(str+'(', left+1, right, n, answer))
-      answer.concat(generate(str+')', left, right+1, n, answer))
-    }
-    return answer
+  if (n === 0) {
+    return ['']
+  }
+  var answer = []
+  for (var i=0;i<n;i++) {
+    generateParenthesis(i).forEach(left => {
+      generateParenthesis(n-1-i).forEach(right => {
+        answer.push('(' + left + ')' + right)
+      })
+    })
   }
 
-  return generate('', 0, 0, n, [])
+  return answer
 }
 // @lc code=end
 
