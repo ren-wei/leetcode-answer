@@ -21,31 +21,41 @@ var reverseKGroup = function(head, k) {
   if (k < 2 || head === null) {
     return head
   }
-  // 确定head的位置
-  var start = head
-  var end = head
-  for (var i=0;i<k-1;i++) {
-    end = end.next
-    // 如果长度不够时，直接返回
-    if (end === null) {
-      return head
+  function reverse(head) {
+    var pre = null
+    var cur = head
+    while (cur !== null) {
+      var next = cur.next
+      cur.next = pre
+      pre = cur
+      cur = next
     }
+    return pre
   }
-  head = end
-  var nexthead = head.next
-  end.next = null
-  // 翻转前k个元素
-  var pre = null
-  var cur = start
-  while (cur !== null) {
-    var next = cur.next
-    cur.next = pre
-    pre = cur
-    cur = next
-  }
-  start.next = reverseKGroup(nexthead, k)
 
-  return head
+  var dummy = new ListNode(0)
+  dummy.next = head
+
+  var pre = dummy
+  var end = dummy
+  while (end.next !== null) {
+    for (var i=0;i<k;i++) {
+      end = end.next
+      if (end === null) {
+        return dummy.next
+      }
+    }
+    var start = pre.next
+    var next = end.next
+    end.next = null
+    pre.next = reverse(start)
+    start.next = next
+
+    pre = start
+    end = pre
+  }
+
+  return dummy.next
 }
 // @lc code=end
 
