@@ -11,21 +11,39 @@
  * @return {number}
  */
 var strStr = function(haystack, needle) {
+  // 处理边界情况
+  if (needle.length > haystack.length) {
+    return -1
+  }
   if (!needle.length) {
     return 0
   }
-  for (var i=0;i<haystack.length;i++) {
+  // 计算偏移表
+  var offset = new Map()
+  for (var i=0;i<needle.length;i++) {
+    offset.set(needle[i], needle.length-i)
+  }
+  // 开始匹配
+  var index = 0
+  while (index + needle.length <= haystack.length) {
     var isEqual = true
-    for (var j=0;j<needle.length;j++) {
-      if (haystack[i+j] !== needle[j]) {
+    for (i=0;i<needle.length;i++) {
+      if (haystack[index+i] !== needle[i]) {
         isEqual = false
         break
       }
     }
     if (isEqual) {
-      return i
+      return index
+    }
+    var offsetValue = offset.get(haystack[index+needle.length])
+    if (offsetValue) {
+      index += offsetValue
+    } else {
+      index += needle.length + 1
     }
   }
+
   return -1
 }
 // @lc code=end
