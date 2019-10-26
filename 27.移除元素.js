@@ -11,15 +11,17 @@
  * @return {number}
  */
 var removeElement = function(nums, val) {
-  var i=0
+  var index = 0
+  var i = 0
   while (i < nums.length) {
-    if (nums[i] === val) {
-      nums.splice(i, 1)
-    } else {
-      i++
+    if (nums[i] !== val) {
+      nums[index] = nums[i]
+      index++
     }
+    i++
   }
-  return nums.length
+
+  return index
 }
 // @lc code=end
 
