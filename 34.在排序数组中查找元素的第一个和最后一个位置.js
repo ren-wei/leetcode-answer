@@ -37,7 +37,7 @@ var searchRange = function(nums, target) {
     if (nums[end] === target) {
         // 向右扩展
         if (start === -1) {
-            start = end
+            return [end, end]
         }
         while(nums[end + 1] === target) {
             end++
