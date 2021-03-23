@@ -4,6 +4,8 @@
  * [25] K 个一组翻转链表
  */
 
+/* global ListNode */
+
 // @lc code=start
 /**
  * Definition for singly-linked list.
@@ -18,44 +20,45 @@
  * @return {ListNode}
  */
 var reverseKGroup = function(head, k) {
-  if (k < 2 || head === null) {
-    return head
-  }
-  function reverse(head) {
-    var pre = null
-    var cur = head
-    while (cur !== null) {
-      var next = cur.next
-      cur.next = pre
-      pre = cur
-      cur = next
+    if (k < 2 || head === null) {
+        return head;
     }
-    return pre
-  }
-
-  var dummy = new ListNode(0)
-  dummy.next = head
-
-  var pre = dummy
-  var end = dummy
-  while (end.next !== null) {
-    for (var i=0;i<k;i++) {
-      end = end.next
-      if (end === null) {
-        return dummy.next
-      }
+    function reverse(head) {
+        var pre = null;
+        var cur = head;
+        while (cur !== null) {
+            var next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
-    var start = pre.next
-    var next = end.next
-    end.next = null
-    pre.next = reverse(start)
-    start.next = next
 
-    pre = start
-    end = pre
-  }
+    var dummy = new ListNode(0);
+    dummy.next = head;
 
-  return dummy.next
-}
+    var pre = dummy;
+    var end = dummy;
+    while (end.next !== null) {
+        for (var i = 0; i < k; i++) {
+            end = end.next;
+            if (end === null) {
+                return dummy.next;
+            }
+        }
+        var start = pre.next;
+        var next = end.next;
+        end.next = null;
+        pre.next = reverse(start);
+        start.next = next;
+
+        pre = start;
+        end = pre;
+    }
+
+    return dummy.next;
+};
 // @lc code=end
 
+module.exports = reverseKGroup;

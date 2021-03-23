@@ -18,21 +18,22 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-  var node = head
-  for (var i=0;i<n;i++) {
-    node = node.next
-  }
-  if (node === null) {
-    return head.next
-  }
-  var target = head
-  while (node.next !== null) {
-    target = target.next
-    node = node.next
-  }
-  target.next = target.next.next
+    var node = head;
+    for (var i = 0; i < n; i++) {
+        node = node.next;
+    }
+    if (node === null) {
+        return head.next;
+    }
+    var target = head;
+    while (node.next !== null) {
+        target = target.next;
+        node = node.next;
+    }
+    target.next = target.next.next;
 
-  return head
-}
+    return head;
+};
 // @lc code=end
 
+module.exports = removeNthFromEnd;

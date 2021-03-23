@@ -11,31 +11,32 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-  if (numRows === 1) {
-    return s
-  }
-  var result = ''
-  var len = s.length
-  var loopLen = 2 * numRows - 2
-
-  // 第一层
-  for (var j=0;j<len;j+=loopLen) {
-    result += s[j]
-  }
-  // 中间层
-  for (var i=1;i<numRows-1;i++) {
-    for (var j=0;j + i < len;j += loopLen) {
-      result += s[j+i]
-      if (j + loopLen -i < len) {
-        result += s[j+loopLen-i]
-      }
+    if (numRows === 1) {
+        return s;
     }
-  }
-  // 最后一层
-  for (var j=numRows-1;j<len;j += loopLen) {
-    result += s[j]
-  }
-  return result
+    var result = '';
+    var len = s.length;
+    var loopLen = 2 * numRows - 2;
+
+    // 第一层
+    for (let j = 0; j < len; j += loopLen) {
+        result += s[j];
+    }
+    // 中间层
+    for (var i = 1; i < numRows - 1; i++) {
+        for (let j = 0; j + i < len; j += loopLen) {
+            result += s[j + i];
+            if (j + loopLen - i < len) {
+                result += s[j + loopLen - i];
+            }
+        }
+    }
+    // 最后一层
+    for (let j = numRows - 1; j < len; j += loopLen) {
+        result += s[j];
+    }
+    return result;
 };
 // @lc code=end
 
+module.exports = convert;

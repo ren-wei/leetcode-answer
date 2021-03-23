@@ -10,30 +10,32 @@
  * @return {number}
  */
 var maxArea = function(height) {
-  var answer = 0
-  var left = 0
-  var right = height.length - 1
-  while (left < right) {
-    var leftValue = height[left]
-    var rightValue = height[right]
-    if (leftValue < rightValue) {
-      var volume = leftValue * (right - left)
-      if (volume > answer) {
-        answer = volume
-      }
-      while (height[++left] < leftValue) {
-      }
-    } else {
-      var volume = rightValue * (right - left)
-      if (volume > answer) {
-        answer = volume
-      }
-      while (height[--right] < rightValue) {
-      }
+    /* eslint-disable no-empty */
+    var answer = 0;
+    var left = 0;
+    var right = height.length - 1;
+    while (left < right) {
+        var leftValue = height[left];
+        var rightValue = height[right];
+        if (leftValue < rightValue) {
+            var volume = leftValue * (right - left);
+            if (volume > answer) {
+                answer = volume;
+            }
+            while (height[++left] < leftValue) {
+            }
+        } else {
+            volume = rightValue * (right - left);
+            if (volume > answer) {
+                answer = volume;
+            }
+            while (height[--right] < rightValue) {
+            }
+        }
     }
-  }
 
-  return answer
+    return answer;
 };
 // @lc code=end
 
+module.exports = maxArea;

@@ -10,25 +10,26 @@
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-  if (n === 0) {
-    return ['']
-  }
-
-  var answer = [[''], ['()']]
-
-  for (var i=2;i<n+1;i++) {
-    var left = []
-    for (var j=0;j<i;j++) {
-      answer[j].forEach(p => {
-        answer[i-1-j].forEach(q => {
-          left.push('(' + p + ')' + q)
-        })
-      })
+    if (n === 0) {
+        return [''];
     }
-    answer.push(left)
-  }
 
-  return answer[n]
-}
+    var answer = [[''], ['()']];
+
+    for (var i = 2; i < n + 1; i++) {
+        var left = [];
+        for (var j = 0; j < i; j++) {
+            answer[j].forEach(p => {
+                answer[i - 1 - j].forEach(q => {
+                    left.push('(' + p + ')' + q);
+                });
+            });
+        }
+        answer.push(left);
+    }
+
+    return answer[n];
+};
 // @lc code=end
 
+module.exports = generateParenthesis;

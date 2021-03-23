@@ -10,16 +10,17 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-  var index = 0
-  var i = 0
-  while (i < nums.length) {
-    if (nums[i] !== nums[i-1]) {
-      nums[index] = nums[i]
-      index++
+    var index = 0;
+    var i = 0;
+    while (i < nums.length) {
+        if (nums[i] !== nums[i - 1]) {
+            nums[index] = nums[i];
+            index++;
+        }
+        i++;
     }
-    i++
-  }
-  return index
-}
+    return index;
+};
 // @lc code=end
 
+module.exports = removeDuplicates;

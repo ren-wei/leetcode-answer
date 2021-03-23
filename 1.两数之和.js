@@ -3,23 +3,27 @@
  *
  * [1] 两数之和
  */
+
+// @lc code=start
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-  if (nums.length < 2) {
-    return null
-  }
-  
-  var map = new Map()
-  for (var i=0;i<nums.length;i++) {
-    var value = map.get(target - nums[i])
-    if (value !== undefined) {
-      return [value, i]
+    if (nums.length < 2) {
+        return null;
     }
-    map.set(nums[i], i)
-  }
-};
 
+    var map = new Map();
+    for (var i = 0; i < nums.length; i++) {
+        var value = map.get(target - nums[i]);
+        if (value !== undefined) {
+            return [value, i];
+        }
+        map.set(nums[i], i);
+    }
+};
+// @lc code=end
+
+module.exports = twoSum;
